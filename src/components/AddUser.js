@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import { addUser } from "../util/api";
+
 import {
   FormControl,
   FormGroup,
@@ -23,40 +25,50 @@ const Btn = styled(Button)`
 `;
 
 const defaultData = {
-  fullName: "",
-  City: "",
-  Email: "",
-  Phone: "",
+  name: "",
+  city: "",
+  email: "",
+  phone: "",
 };
 
-
 const AddUser = () => {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(defaultData);
+
+  const onValueChange = (e) => {
+    setUser({ ...user, [e.target.name]: e.target.value });
+    console.log(user);
+  };
+
+  const userDetailsHandler = async () => {
+    await addUser(user);
+  };
 
   return (
     <Conatainer>
       <Typography variant="h4">Add User</Typography>
       <FormControl>
         <InputLabel>Full Name</InputLabel>
-        <Input onChange={(e) => onValueChange(e)} />
+        <Input onChange={(e) => onValueChange(e)} name="name" />
       </FormControl>
 
       <FormControl>
         <InputLabel>City</InputLabel>
-        <Input />
+        <Input onChange={(e) => onValueChange(e)} name="city" />
       </FormControl>
 
       <FormControl>
         <InputLabel>Email</InputLabel>
-        <Input />
+        <Input onChange={(e) => onValueChange(e)} name="email" />
       </FormControl>
 
       <FormControl>
         <InputLabel>Phone</InputLabel>
-        <Input />
+        <Input onChange={(e) => onValueChange(e)} name="phone" />
       </FormControl>
 
-      <Btn variant="contained">Register Now!</Btn>
+      <Btn variant="contained" onClick={() => userDetailsHandler()}>
+        Register Now!
+      </Btn>
     </Conatainer>
   );
 };
