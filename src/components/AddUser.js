@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { addUser } from "../util/api";
+import { addUser } from "../util/api.js";
 
 import {
   FormControl,
