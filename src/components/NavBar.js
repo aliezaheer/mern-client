@@ -20,7 +20,7 @@ const NavBar = () => {
       <Header>
         <Toolbar>
           <Tabs to="/">User Details</Tabs>
-          <Tabs to="all">All Users</Tabs>
+          <Tabs to="users-list">All Users</Tabs>
           <Tabs to="add">Add User</Tabs>
         </Toolbar>
       </Header>

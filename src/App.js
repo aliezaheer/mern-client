@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AllUsers from "./components/AllUsers";
 import AddUser from "./components/AddUser";
 import UserDetails from "./components/UserDetails";
+import EditUser from "./components/EditUser";
 
 function App() {
   return (
@@ -11,8 +12,9 @@ function App() {
       <NavBar />
       <Routes>
         <Route path="/" element={<UserDetails />} />
-        <Route path="/all" element={<AllUsers />} />
+        <Route path="/users-list" element={<AllUsers />} />
         <Route path="/add" element={<AddUser />} />
+        <Route path="/edit/:id" element={<EditUser />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-import { addUser } from "../util/api.js";
+import { getUser } from "../util/api.js";
 
 import {
   FormControl,
@@ -12,7 +12,7 @@ import {
   styled,
 } from "@mui/material";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const Conatainer = styled(FormGroup)`
   width: 50%;
@@ -33,10 +33,19 @@ const defaultData = {
   phone: "",
 };
 
-const AddUser = () => {
+const EditUser = () => {
   const [user, setUser] = useState(defaultData);
 
+  useEffect(() => {
+    populateDetails();
+  }, []);
+
+  const populateDetails = async () => {
+    const response = await getUser(_id);
+  };
+
   const navigate = useNavigate();
+  const { _id } = useParams;
 
   const onValueChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -44,13 +53,13 @@ const AddUser = () => {
   };
 
   const userDetailsHandler = async () => {
-    await addUser(user);
+    await getUser(user);
     navigate("/users-list");
   };
 
   return (
     <Conatainer>
-      <Typography variant="h4">Add User</Typography>
+      <Typography variant="h4">Edit User</Typography>
       <FormControl>
         <InputLabel>Full Name</InputLabel>
         <Input onChange={(e) => onValueChange(e)} name="name" />
@@ -78,4 +87,4 @@ const AddUser = () => {
   );
 };
 
-export default AddUser;
+export default EditUser;

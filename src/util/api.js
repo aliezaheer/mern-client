@@ -9,3 +9,19 @@ export const addUser = async (data) => {
     console.log(error);
   }
 };
+
+export const getUsers = async () => {
+  try {
+    return await axios.get(`${userURL}/users-list`);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getUser = async (_id) => {
+  try {
+    return await axios.get(`${userURL}/${_id}`);
+  } catch (error) {
+    console.log(error);
+  }
+};
