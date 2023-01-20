@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 
-import { getUser } from "../util/api.js";
+import { addUser, getUser } from "../util/api.js";
+
+import { useNavigate, useParams } from "react-router-dom";
 
 import {
   FormControl,
@@ -11,8 +13,6 @@ import {
   Button,
   styled,
 } from "@mui/material";
-
-import { useNavigate, useParams } from "react-router-dom";
 
 const Conatainer = styled(FormGroup)`
   width: 50%;
@@ -36,16 +36,18 @@ const defaultData = {
 const EditUser = () => {
   const [user, setUser] = useState(defaultData);
 
+  const navigate = useNavigate();
+  const { _id } = useParams;
+
   useEffect(() => {
     populateDetails();
   }, []);
 
   const populateDetails = async () => {
-    const response = await getUser(_id);
+    let reposnse = await getUser(_id);
+    setUser(reposnse.data._id);
+    console.log(reposnse.data._id);
   };
-
-  const navigate = useNavigate();
-  const { _id } = useParams;
 
   const onValueChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -53,7 +55,7 @@ const EditUser = () => {
   };
 
   const userDetailsHandler = async () => {
-    await getUser(user);
+    await addUser(user);
     navigate("/users-list");
   };
 

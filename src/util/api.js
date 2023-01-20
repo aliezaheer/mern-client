@@ -20,8 +20,8 @@ export const getUsers = async () => {
 
 export const getUser = async (_id) => {
   try {
-    return await axios.get(`${userURL}/${_id}`);
+    return await axios.get(`${userURL}/edit/${_id}`);
   } catch (error) {
-    console.log(error);
+    console.log(`Error while edit api${error}`);
   }
 };
